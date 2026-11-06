@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+/* ── Design tokens ───────────────────────────────────────────────────────
+   Keep the --tier-* values identical to the colours used in the Tableau
+   workbooks so the legend on the site matches the vizzes. */
+:root,
+.theme-base {
+  --bg: #f5f6fa;
+  --surface: #ffffff;
+  --surface-2: #eceef5;
+  --text: #0e1525;
+  --muted: #586178;
+  --border: #dfe3ec;
+  --primary: #4338ca;
+  --primary-soft: #e6e5fb;
+  --on-primary: #ffffff;
+  --signal: #c2410c; /* ChatGPT marker / callouts */
+  --signal-soft: #fdeee4;
+  --viz-surface: #ffffff;
+
+  --tier-low: #c7d2fe;
+  --tier-moderate: #8b93f5;
+  --tier-high: #4f46e5;
+  --tier-vhigh: #27207a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root,
+  .theme-base {
+    --bg: #0a0e19;
+    --surface: #121827;
+    --surface-2: #1a2134;
+    --text: #e7eaf3;
+    --muted: #9aa3b9;
+    --border: #273049;
+    --primary: #a5a8ff;
+    --primary-soft: #23264a;
+    --on-primary: #0a0e19;
+    --signal: #fb923c;
+    --signal-soft: #2b1a10;
+    /* Tableau vizzes render on white, so keep their frame light */
+    --viz-surface: #ffffff;
+  }
+}
+
+/* Deep-purple scope used to set the dashboards section apart.
+   Text sitting directly on it re-themes; add .theme-base to cards inside
+   it to put them back on the normal (white) palette. */
+.theme-deep {
+  --bg: #1f1752;
+  --surface: #2a2170;
+  --surface-2: #352b82;
+  --text: #f4f2ff;
+  --muted: #c0b9ec;
+  --border: rgba(255, 255, 255, 0.14);
+  --primary: #c9bcff;
+  --primary-soft: rgba(201, 188, 255, 0.16);
+  --on-primary: #1f1752;
+  --signal: #fdba74;
+  --signal-soft: rgba(251, 146, 60, 0.14);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(60rem 30rem at 85% -10%, rgba(139, 92, 246, 0.35), transparent 70%),
+    radial-gradient(50rem 30rem at -10% 110%, rgba(79, 70, 229, 0.35), transparent 70%);
+}
+
+@media (prefers-color-scheme: dark) {
+  .theme-deep {
+    --bg: #170f40;
+    --surface: #221a5c;
+    --surface-2: #2c236e;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--text);
+  --color-muted: var(--muted);
+  --color-line: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-soft: var(--primary-soft);
+  --color-on-primary: var(--on-primary);
+  --color-signal: var(--signal);
+  --color-signal-soft: var(--signal-soft);
+  --color-tier-low: var(--tier-low);
+  --color-tier-moderate: var(--tier-moderate);
+  --color-tier-high: var(--tier-high);
+  --color-tier-vhigh: var(--tier-vhigh);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--primary-soft);
+}
+
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
