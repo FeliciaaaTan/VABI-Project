@@ -9,8 +9,8 @@ export const site = {
     "Coverage swings between “AI is replacing workers” and “nothing has changed yet.” We put validated AI-exposure measures next to real U.S. employment, wage and hiring data from 2013 to 2025, so you can test the claims yourself.",
   links: {
     report: undefined as string | undefined, // e.g. "/report.pdf"
-    github: undefined as string | undefined,
-    tableauProfile: undefined as string | undefined,
+    github: "https://github.com/FeliciaaaTan/VABI-Project" as string | undefined,
+    tableauProfile: "https://public.tableau.com/app/profile/felicia.paulus3833/viz/IS428-G1T3-Project/D1WhoisExposed" as string | undefined,
   },
 };
 

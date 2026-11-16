@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import { themeInitScript } from "@/components/ui/ThemeToggle";
 
 const body = Inter({ variable: "--font-body", subsets: ["latin"] });
 const heading = Space_Grotesk({ variable: "--font-heading", subsets: ["latin"] });
@@ -14,7 +15,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    // data-theme is set by the inline script before hydration, hence suppressHydrationWarning.
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className={`${body.variable} ${heading.variable} font-sans antialiased`}>
         {children}
         {/* Tableau Embedding API v3: registers the <tableau-viz> web component */}

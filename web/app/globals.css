@@ -22,11 +22,14 @@
   --tier-moderate: #f28e2b;
   --tier-low: #4e79a7;
   --tier-none: #bab0ac;
+  color-scheme: light;
 }
 
+/* Dark theme: follows the system setting unless the toggle picked one
+   (data-theme on <html>). The two blocks below must stay identical. */
 @media (prefers-color-scheme: dark) {
-  :root,
-  .theme-base {
+  :root:not([data-theme="light"]),
+  :root:not([data-theme="light"]) .theme-base {
     --bg: #0a0e19;
     --surface: #121827;
     --surface-2: #1a2134;
@@ -40,7 +43,26 @@
     --signal-soft: #2b1a10;
     /* Tableau vizzes render on white, so keep their frame light */
     --viz-surface: #ffffff;
+    color-scheme: dark;
   }
+}
+
+:root[data-theme="dark"],
+:root[data-theme="dark"] .theme-base {
+  --bg: #0a0e19;
+  --surface: #121827;
+  --surface-2: #1a2134;
+  --text: #e7eaf3;
+  --muted: #9aa3b9;
+  --border: #273049;
+  --primary: #a5a8ff;
+  --primary-soft: #23264a;
+  --on-primary: #0a0e19;
+  --signal: #fb923c;
+  --signal-soft: #2b1a10;
+  /* Tableau vizzes render on white, so keep their frame light */
+  --viz-surface: #ffffff;
+  color-scheme: dark;
 }
 
 /* Deep-purple scope used to set the dashboards section apart.
@@ -65,11 +87,17 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .theme-deep {
+  :root:not([data-theme="light"]) .theme-deep {
     --bg: #170f40;
     --surface: #221a5c;
     --surface-2: #2c236e;
   }
+}
+
+:root[data-theme="dark"] .theme-deep {
+  --bg: #170f40;
+  --surface: #221a5c;
+  --surface-2: #2c236e;
 }
 
 @theme inline {
