@@ -38,7 +38,7 @@ export const nav: NavItem[] = [
 export const heroStats = [
   { value: "~3%", label: "of U.S. jobs are highly exposed to AI", note: "Anthropic Economic Index × OEWS 2025" },
   { value: "−5.6%", label: "employment change in high-exposure jobs after ChatGPT (2022–25), after growing in earlier periods", note: "OEWS · employment index 2013–2016 = 100" },
-  { value: "—", label: "change in young workers' employment in the most exposed occupations", note: "CPS · Age" },
+  { value: "−2.4%", label: "change in young workers' (20–24) employment in exposed jobs, 2022→2025, while other young workers grew 5.8%", note: "CPS · Age" },
 ];
 
 /** The four research questions, in story order. They drive the dashboard tabs. */
@@ -80,8 +80,8 @@ export const questions = [
 export const findings = [
   { q: "Q1", stat: "~3%", title: "Few jobs are highly exposed", body: "Despite the hype, only about 3% of U.S. jobs are highly exposed to AI, according to Anthropic's Economic Index." },
   { q: "Q2", stat: "↓ jobs", title: "Employment fell, wages held", body: "Employment in highly exposed occupations declined, mostly in Office & Admin Support, which was already falling before COVID and ChatGPT. Wages showed no significant change." },
-  { q: "Q3", stat: "—", title: "Placeholder finding headline", body: "Placeholder: whether the trend differs for younger vs older workers." },
-  { q: "Q4", stat: "—", title: "Placeholder finding headline", body: "Placeholder: which tasks are most affected and how the work has changed." },
+  { q: "Q3", stat: "−2.4%", title: "Young workers fell behind", body: "From 2022 to 2025, young workers (20–24) in exposed jobs lost ground while other young workers and older workers in the same jobs grew. The gap is widest in degree jobs." },
+  { q: "Q4", stat: "16 of 28", title: "Behind older colleagues, in AI-heavy jobs", body: "In 16 of 28 highly exposed jobs, young workers fell behind older workers in the same job, often in jobs where AI does most of the tasks." },
 ];
 
 /** Evidence summarised from the proposal's related-works section. */

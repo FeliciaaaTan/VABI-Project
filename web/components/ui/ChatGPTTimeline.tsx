@@ -4,18 +4,36 @@ const { start, end } = analysisWindow;
 const years = Array.from({ length: end - start + 1 }, (_, i) => start + i);
 const x = (year: number) => ((year - start) / (end - start)) * 100;
 
-/** ChatGPT launched 30 Nov 2022 (≈ 2022.91 on a continuous year axis). */
-const CHATGPT = 2022 + 334 / 365;
+/** Reference lines on a continuous year axis (fraction of the year elapsed). */
+const markers = [
+  {
+    // WHO declared COVID-19 a pandemic on 11 Mar 2020.
+    at: 2020 + 70 / 366,
+    label: "COVID-19 · Mar 2020",
+    short: "COVID-19",
+    badge: "bg-ink text-bg",
+    line: "border-l-2 border-dashed border-ink/70",
+  },
+  {
+    // ChatGPT launched 30 Nov 2022.
+    at: 2022 + 333 / 365,
+    label: "ChatGPT · 30 Nov 2022",
+    short: "ChatGPT",
+    badge: "bg-signal text-white",
+    line: "border-l-2 border-signal",
+  },
+];
 
+// Opaque tints (mixed with the card surface) so reference lines don't show through.
 const tone = {
-  baseline: "bg-muted/25 text-muted",
-  pre: "bg-muted/55 text-ink",
+  baseline: "bg-[color-mix(in_srgb,var(--muted)_25%,var(--surface))] text-muted",
+  pre: "bg-[color-mix(in_srgb,var(--muted)_55%,var(--surface))] text-ink",
   post: "bg-primary text-on-primary",
 } as const;
 
 /**
  * The analysis window on a continuous year axis, with the comparison periods
- * drawn as spans and ChatGPT's release marked. Each span shows the employment
+ * drawn as spans and reference lines for COVID-19 and ChatGPT's release. Each span shows the employment
  * index for high-exposure jobs (2013–2016 = 100) and its change from the
  * previous period.
  */
@@ -23,17 +41,21 @@ export function ChatGPTTimeline() {
   return (
     <figure className="w-full">
       <div className="relative mx-2 pt-10 sm:mx-3">
-        {/* ChatGPT marker */}
-        <div
-          className="pointer-events-none absolute top-0 bottom-8 z-10 flex -translate-x-1/2 flex-col items-center"
-          style={{ left: `${x(CHATGPT)}%` }}
-          aria-hidden
-        >
-          <span className="rounded-full bg-signal px-2.5 py-1 text-[11px] font-semibold whitespace-nowrap text-white shadow sm:text-xs">
-            ChatGPT · 30 Nov 2022
-          </span>
-          <span className="w-0.5 flex-1 bg-signal" />
-        </div>
+        {/* reference lines: COVID-19 and ChatGPT */}
+        {markers.map((m) => (
+          <div
+            key={m.label}
+            className="pointer-events-none absolute top-0 bottom-8 z-10 flex -translate-x-1/2 flex-col items-center"
+            style={{ left: `${x(m.at)}%` }}
+            aria-hidden
+          >
+            <span className={`rounded-full px-2.5 py-1 text-[11px] font-semibold whitespace-nowrap shadow sm:text-xs ${m.badge}`}>
+              <span className="sm:hidden">{m.short}</span>
+              <span className="hidden sm:inline">{m.label}</span>
+            </span>
+            <span className={`flex-1 ${m.line}`} />
+          </div>
+        ))}
 
         {/* period spans (above the marker line so it doesn't cross their text) */}
         <div className="relative z-20 h-16">
@@ -85,6 +107,7 @@ export function ChatGPTTimeline() {
         </div>
       </div>
 
+      <p className="sr-only">Reference lines: COVID-19 pandemic declared 11 March 2020; ChatGPT released 30 November 2022.</p>
       <figcaption className="mt-3 flex flex-wrap gap-x-6 gap-y-1.5 text-xs text-muted sm:text-sm">
         {periods.map((p) => (
           <span key={`${p.from}-${p.to}`} className="inline-flex items-center gap-1.5">

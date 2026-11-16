@@ -168,7 +168,7 @@ function QuestionPanel({ id }: { id: (typeof questions)[number]["id"] }) {
   const q = questions.find((x) => x.id === id)!;
   return (
     <div>
-      <header className="mb-8 max-w-4xl">
+      <header className="mb-8">
         <p className="mb-2 text-sm font-semibold tracking-wider text-primary uppercase">
           Research question {q.num} · {q.short}
         </p>

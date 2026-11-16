@@ -22,8 +22,8 @@ type TableauVizElement = HTMLElement & {
 const DEFAULT_HEIGHT = { desktop: 780, mobile: 600 };
 /** Don't blow small dashboards up by more than this. */
 const MAX_SCALE = 1.5;
-/** Height ÷ width for "Automatic" dashboards (matches the 1366 × 768 layout). */
-const AUTO_ASPECT = 768 / 1366;
+/** Height ÷ width for "Automatic" dashboards (matches the team's 1400 × 950 layout). */
+const AUTO_ASPECT = 950 / 1400;
 /** Minimum frame height for "Automatic" dashboards on desktop. */
 const AUTO_MIN_DESKTOP = 560;
 

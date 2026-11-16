@@ -28,17 +28,12 @@ export type Viz = {
   why: string;
 };
 
-const TODO_INSIGHT =
-  "Placeholder: state the single most important pattern this viz reveals, with a number where possible.";
-const TODO_WHY =
-  "Placeholder: explain who should care (job seekers, employers, policymakers) and what it changes for them.";
-
 export const vizzes: Viz[] = [
   // ── Q1 · Which occupations are most exposed? ──────────────────────────
   {
     id: "q1-exposure-map",
     question: "q1",
-    title: "Who is exposed?",
+    title: "Which jobs are exposed?",
     kind: "dashboard",
     src: "https://public.tableau.com/views/IS428-G1T3-Project/D1WhoisExposed",
     height: { desktop: 840, mobile: 640 },
@@ -48,6 +43,18 @@ export const vizzes: Viz[] = [
       "Despite the hype about AI taking over jobs, only about 3% of U.S. jobs are highly exposed to AI, according to Anthropic's Economic Index.",
     why: "It shows which jobs count as highly exposed, and so which are most likely to see AI's effects on employment and wages.",
   },
+  {
+    id: "q1-exposed-tasks",
+    question: "q1",
+    title: "Which tasks within those jobs?",
+    kind: "dashboard",
+    src: "https://public.tableau.com/views/IS428-G1T3-Project/D2WhoisExposedPt2",
+    interact: "Hover a bar to see how often AI does the task versus helps a person do it. Hover the word cloud for each activity's share.",
+    what: "The tasks inside the most exposed occupations: whether AI automates them or helps a person do them, and what employees use generative AI for at work.",
+    insight:
+      "In 13 of the 20 most exposed jobs, most AI use automates the task rather than helping a person do it. At work, employees mostly use generative AI for writing & editing, information search and document interpretation.",
+    why: "It shows what kind of work AI is actually taking on inside these jobs, not just which jobs are exposed.",
+  },
 
   // ── Q2 · What happened to employment & wages? ─────────────────────────
   {
@@ -55,7 +62,7 @@ export const vizzes: Viz[] = [
     question: "q2",
     title: "Jobs & wages: the overall trend",
     kind: "dashboard",
-    src: "https://public.tableau.com/views/IS428-G1T3-Project/D2JobsandWage",
+    src: "https://public.tableau.com/views/IS428-G1T3-Project/D3JobsandWage",
     height: { desktop: 840, mobile: 640 },
     interact: "Use the filters on the right to switch the wage basis, pick periods and exclude occupations. Hover any line or bar for details.",
     what: "How employment and wages across AI-exposure levels changed over each period, from pre-COVID to post-ChatGPT.",
@@ -68,7 +75,7 @@ export const vizzes: Viz[] = [
     question: "q2",
     title: "Inside the exposed jobs: is the trend real?",
     kind: "dashboard",
-    src: "https://public.tableau.com/views/IS428-G1T3-Project/D3InsidetheExposedJobs",
+    src: "https://public.tableau.com/views/IS428-G1T3-Project/D4InsidetheExposedJobs",
     height: { desktop: 840, mobile: 640 },
     interact: "Compare job families across periods in the heatmap, then hover the scatter and line charts to see individual occupations.",
     what: "The same trends broken down into job families and individual highly exposed occupations.",
@@ -79,49 +86,42 @@ export const vizzes: Viz[] = [
 
   // ── Q3 · Differences across age groups? ───────────────────────────────
   {
-    id: "q3-age-trends",
+    id: "q3-age",
     question: "q3",
-    title: "Employment in exposed occupations by age group",
+    title: "Young vs older workers",
     kind: "dashboard",
-    tierLegend: true,
-    interact: "Filter by age group and exposure tier. Hover for yearly values.",
-    what: "Placeholder: employment trends for each age group, split by AI-exposure tier.",
-    insight: TODO_INSIGHT,
-    why: TODO_WHY,
-  },
-  {
-    id: "q3-age-gap",
-    question: "q3",
-    title: "Younger vs older workers: the gap by exposure tier",
-    kind: "sheet",
-    variants: [{ label: "Employment" }, { label: "Median wage" }],
-    height: { desktop: 600, mobile: 500 },
-    interact: "Switch the outcome above.",
-    what: "Placeholder: the difference between younger and older workers' trends within each exposure tier.",
-    insight: TODO_INSIGHT,
-    why: TODO_WHY,
+    src: "https://public.tableau.com/views/IS428-G1T3-Project/D5Age",
+    interact: "Hover the lines and bars for exact values.",
+    what: "Employment for young (20–24) and prime-age (35–54) workers by AI-exposure level, indexed to 2022 = 100 (CPS), plus each age group's change from 2022 to 2025, split by whether the job usually needs a degree.",
+    insight:
+      "In 2025, young workers did worse as exposure rose. From 2022 to 2025, young workers in exposed jobs fell 2.4% while other young workers grew 5.8%, even as older workers in exposed jobs grew. The gap is widest in jobs that usually need a degree (−4.1% vs +9.7%).",
+    why: "It shows whether any AI effect falls hardest on early-career workers trying to enter exposed jobs.",
   },
 
   // ── Q4 · Which tasks are impacted & how have they changed? ────────────
   {
-    id: "q4-task-exposure",
+    id: "q4-task",
     question: "q4",
-    title: "Which kinds of tasks are most exposed?",
+    title: "Inside the jobs where young workers fell behind",
     kind: "dashboard",
-    interact: "Pick an occupation or task category to see its exposed tasks.",
-    what: "Placeholder: tasks within occupations, grouped by type of work and coloured by exposure.",
-    insight: TODO_INSIGHT,
-    why: TODO_WHY,
+    src: "https://public.tableau.com/views/IS428-G1T3-Project/D6Task",
+    interact: "Hover a job to compare young and older workers. Hover the bars to see how much of each job's work AI does.",
+    what: "Within each highly exposed occupation, the change in employment for ages 20–24 vs all other ages (2022 vs 2024–25 average), and how much of the work in the jobs where young workers fell furthest is done by AI.",
+    insight:
+      "In 16 of 28 highly exposed jobs, young workers fell behind older workers in the same job. In several of the jobs where they fell furthest, such as interviewers, data entry keyers and secretaries, AI does most of the tasks.",
+    why: "It links the age gap to the work itself: where AI can do the tasks, entry-level roles may be the first to shrink.",
   },
   {
-    id: "q4-task-change",
+    id: "q4-training-vs-hiring",
     question: "q4",
-    title: "How the work has changed",
-    kind: "dashboard",
-    interact: "Compare before and after ChatGPT. Hover for details.",
-    what: "Placeholder: how tasks and skills asked for have shifted over time, e.g. the share of job postings mentioning AI or generative AI (Indeed Hiring Lab).",
-    insight: TODO_INSIGHT,
-    why: TODO_WHY,
+    title: "Companies train existing staff rather than hire for AI",
+    kind: "sheet",
+    src: "https://public.tableau.com/views/IS428-G1T3-Project/17Trainingvshiring",
+    interact: "Hover a dot for the exact share in each firm-size group.",
+    what: "Among AI-using businesses (Census BTOS), the share in each firm-size group that trained current staff to use AI vs hired AI-trained staff.",
+    insight:
+      "At every firm size, training existing staff is far more common than hiring AI-trained staff: from 13.4% vs 1.0% at firms with 1–4 employees, to 31.4% vs 6.8% at firms with 250+. Larger firms do more of both.",
+    why: "It suggests companies are adapting how their existing workers do the job rather than hiring new AI talent, which may help explain why young, entry-level workers are falling behind.",
   },
 ];
 
