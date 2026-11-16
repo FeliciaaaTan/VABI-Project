@@ -81,7 +81,7 @@ export const findings = [
   { q: "Q1", stat: "~3%", title: "Few jobs are highly exposed", body: "Despite the hype, only about 3% of U.S. jobs are highly exposed to AI, according to Anthropic's Economic Index." },
   { q: "Q2", stat: "↓ jobs", title: "A decline driven by one job family", body: "Employment in highly exposed jobs fell while wages held, but the drop is driven by Office & Admin Support, which was already declining before COVID and ChatGPT. Without it, the decline isn't significant." },
   { q: "Q3", stat: "−2.4%", title: "Young workers fell behind", body: "From 2022 to 2025, young workers (20–24) in exposed jobs lost ground while other young workers and older workers in the same jobs grew. The gap is widest in degree jobs." },
-  { q: "Q4", stat: "16 of 28", title: "Behind older colleagues, in AI-heavy jobs", body: "In 16 of 28 highly exposed jobs, young workers fell behind older workers in the same job, often in jobs where AI does most of the tasks." },
+  { q: "Q4", stat: "16 of 28", title: "Behind older colleagues, where AI automates", body: "In 16 of 28 highly exposed jobs, young workers fell behind older workers in the same job, often in jobs where AI mostly automates the work rather than augmenting it." },
 ];
 
 /** Evidence summarised from the proposal's related-works section. */
