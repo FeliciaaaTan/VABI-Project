@@ -8,7 +8,7 @@
  * `variants` turns the panel into a switcher (one frame, several views).
  */
 
-export type QuestionId = "q1" | "q2" | "q3" | "story";
+export type QuestionId = "q1" | "q2" | "q3" | "q4";
 
 export type VizVariant = { label: string; src?: string };
 
@@ -34,115 +34,110 @@ const TODO_WHY =
   "Placeholder: explain who should care (job seekers, employers, policymakers) and what it changes for them.";
 
 export const vizzes: Viz[] = [
-  // ── Q1 · Exposure → outcomes ───────────────────────────────────────────
+  // ── Q1 · Which occupations are most exposed? ──────────────────────────
   {
-    id: "q1-tier-trends",
+    id: "q1-exposure-map",
     question: "q1",
+    title: "Where AI exposure sits across U.S. occupations",
+    kind: "dashboard",
+    tierLegend: true,
+    interact: "Each box is an occupation, sized by employment. Filter by SOC major group and hover for details.",
+    what: "Placeholder: all SOC-coded occupations sized by employment and coloured by BLS AI-exposure tier.",
+    insight: TODO_INSIGHT,
+    why: TODO_WHY,
+  },
+  {
+    id: "q1-top-exposed",
+    question: "q1",
+    title: "Most exposed occupations by AIOE score",
+    kind: "sheet",
+    variants: [{ label: "All tiers" }, { label: "Very high" }, { label: "High" }, { label: "Moderate" }, { label: "Low" }],
+    height: { desktop: 640, mobile: 520 },
+    interact: "Switch tiers with the buttons above the chart.",
+    what: "Placeholder: occupations ranked by their continuous AIOE exposure score, overall or within one BLS tier.",
+    insight: TODO_INSIGHT,
+    why: TODO_WHY,
+  },
+
+  // ── Q2 · What happened to employment & wages? ─────────────────────────
+  {
+    id: "q2-tier-trends",
+    question: "q2",
     title: "Employment & median wage by AI-exposure tier, 2013–2025",
     kind: "dashboard",
     tierLegend: true,
-    interact: "Toggle between employment and wage, filter by industry, hover for tier totals.",
+    variants: [{ label: "Employment" }, { label: "Median wage" }],
+    interact: "Switch the outcome above. Hover a line to compare tiers in the same year. The vertical rule marks ChatGPT's release.",
     what: "Placeholder: annual OEWS employment and median wages, aggregated by BLS AI-exposure tier (Low → Very high).",
     insight: TODO_INSIGHT,
     why: TODO_WHY,
   },
   {
-    id: "q1-occupation-explorer",
-    question: "q1",
+    id: "q2-period-compare",
+    question: "q2",
+    title: "Growth by period: 2013–16, 2016–19, 2019–22 (COVID era) vs 2023–25",
+    kind: "dashboard",
+    tierLegend: true,
+    interact: "Compare each tier's growth across the four periods. Filter by SOC major group.",
+    what: "Placeholder: each tier's employment and wage growth in the post-ChatGPT period next to its own earlier periods.",
+    insight: TODO_INSIGHT,
+    why: TODO_WHY,
+  },
+  {
+    id: "q2-occupation-explorer",
+    question: "q2",
     title: "Occupation explorer",
     kind: "dashboard",
     tierLegend: true,
-    interact: "Filter by exposure tier, industry and SOC major group. Click an occupation to see its trend.",
+    interact: "Search or click an occupation to see its employment and wage trend.",
     what: "Placeholder: every SOC-coded occupation plotted by AIOE score against employment change, coloured by tier.",
     insight: TODO_INSIGHT,
     why: TODO_WHY,
   },
-  {
-    id: "q1-aioe-rank",
-    question: "q1",
-    title: "Who ranks highest within each tier? (AIOE score)",
-    kind: "sheet",
-    variants: [
-      { label: "Low" },
-      { label: "Moderate" },
-      { label: "High" },
-      { label: "Very high" },
-    ],
-    height: { desktop: 640, mobile: 520 },
-    interact: "Switch tiers with the buttons above the chart.",
-    what: "Placeholder: occupations within one BLS tier ranked by their continuous AIOE exposure score.",
-    insight: TODO_INSIGHT,
-    why: TODO_WHY,
-  },
 
-  // ── Q2 · Before vs after ChatGPT ───────────────────────────────────────
+  // ── Q3 · Differences across age groups? ───────────────────────────────
   {
-    id: "q2-indexed",
-    question: "q2",
-    title: "Indexed employment by tier (2022 = 100)",
+    id: "q3-age-trends",
+    question: "q3",
+    title: "Employment in exposed occupations by age group",
     kind: "dashboard",
     tierLegend: true,
-    interact: "Hover a line to compare tiers in the same year. The vertical rule marks ChatGPT's release.",
-    what: "Placeholder: employment in each tier rebased to the last pre-ChatGPT OEWS estimate (May 2022), so you can compare tiers of different sizes.",
+    interact: "Filter by age group and exposure tier. Hover for yearly values.",
+    what: "Placeholder: employment trends for each age group, split by AI-exposure tier.",
     insight: TODO_INSIGHT,
     why: TODO_WHY,
   },
   {
-    id: "q2-pretrend",
-    question: "q2",
-    title: "Actual vs pre-ChatGPT trend projection",
-    kind: "dashboard",
-    tierLegend: true,
+    id: "q3-age-gap",
+    question: "q3",
+    title: "Younger vs older workers: the gap by exposure tier",
+    kind: "sheet",
     variants: [{ label: "Employment" }, { label: "Median wage" }],
-    interact: "Switch the outcome above. The dashed line extends each tier's 2019–2022 trend.",
-    what: "Placeholder: each tier's 2023–2025 outcomes compared with its own earlier periods (2013–2016, 2016–2019, 2019–2022).",
+    height: { desktop: 600, mobile: 500 },
+    interact: "Switch the outcome above.",
+    what: "Placeholder: the difference between younger and older workers' trends within each exposure tier.",
     insight: TODO_INSIGHT,
     why: TODO_WHY,
   },
 
-  // ── Q3 · Industry demand & adoption ────────────────────────────────────
+  // ── Q4 · Which tasks are impacted & how have they changed? ────────────
   {
-    id: "q3-jolts",
-    question: "q3",
-    title: "Job openings, hires & separations by industry",
+    id: "q4-task-exposure",
+    question: "q4",
+    title: "Which kinds of tasks are most exposed?",
     kind: "dashboard",
-    variants: [{ label: "Openings" }, { label: "Hires" }, { label: "Separations" }],
-    interact: "Pick a measure, then click an industry to highlight it across the timeline.",
-    what: "Placeholder: monthly BLS JOLTS series by NAICS industry, 2019–2025.",
+    interact: "Pick an occupation or task category to see its exposed tasks.",
+    what: "Placeholder: tasks within occupations, grouped by type of work and coloured by exposure.",
     insight: TODO_INSIGHT,
     why: TODO_WHY,
   },
   {
-    id: "q3-adoption",
-    question: "q3",
-    title: "Share of U.S. job postings mentioning AI and GenAI",
-    kind: "sheet",
-    height: { desktop: 560, mobile: 460 },
-    interact: "Hover for the monthly share. Annotations mark major model releases.",
-    what: "Placeholder: Indeed Hiring Lab AI Tracker (national level), share of postings with AI or generative-AI terms.",
-    insight: TODO_INSIGHT,
-    why: TODO_WHY,
-  },
-  {
-    id: "q3-aiie-demand",
-    question: "q3",
-    title: "Industry AI exposure (AIIE) vs change in labour demand",
+    id: "q4-task-change",
+    question: "q4",
+    title: "How the work has changed",
     kind: "dashboard",
-    interact: "Each bubble is an industry. Filter by period (pre / post ChatGPT).",
-    what: "Placeholder: industries plotted by AIIE exposure score against the change in their job-openings rate.",
-    insight: TODO_INSIGHT,
-    why: TODO_WHY,
-  },
-
-  // ── Story ──────────────────────────────────────────────────────────────
-  {
-    id: "story",
-    question: "story",
-    title: "AI's Real Impact on Jobs: the guided story",
-    kind: "story",
-    height: { desktop: 980, mobile: 720 },
-    interact: "Use the story points along the top to step through the narrative.",
-    what: "Placeholder: a Tableau Story that walks through Q1 → Q2 → Q3 in order.",
+    interact: "Compare before and after ChatGPT. Hover for details.",
+    what: "Placeholder: how tasks and skills asked for have shifted over time, e.g. the share of job postings mentioning AI or generative AI (Indeed Hiring Lab).",
     insight: TODO_INSIGHT,
     why: TODO_WHY,
   },

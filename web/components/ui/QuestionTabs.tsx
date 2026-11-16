@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MousePointerClick } from "lucide-react";
+import { ArrowRight, MousePointerClick } from "lucide-react";
 
-type Tab = { id: string; num: number; short: string; title: string; audience: string };
+type Tab = { id: string; num: number; short: string; title: string; blurb: string };
 
 /**
  * Research questions as a tab bar; the selected question's dashboards render below.
@@ -74,7 +74,7 @@ export function QuestionTabs({ tabs, panels }: { tabs: Tab[]; panels: Record<str
         </span>
       </p>
       <div ref={barRef} className="sticky top-16 z-30 -mx-4 scroll-mt-16 bg-bg/90 px-4 py-3 backdrop-blur-md sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12 2xl:-mx-16 2xl:px-16">
-        <div role="tablist" aria-label="Research questions" aria-describedby="question-tabs-hint" className="grid grid-cols-3 gap-2 sm:gap-3">
+        <div role="tablist" aria-label="Research questions" aria-describedby="question-tabs-hint" className="grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4">
           {tabs.map((t, i) => {
             const on = t.id === active;
             return (
@@ -102,7 +102,7 @@ export function QuestionTabs({ tabs, panels }: { tabs: Tab[]; panels: Record<str
                   <span className={`block font-display text-sm font-semibold sm:text-base ${on ? "text-primary" : "text-ink"}`}>
                     {t.short}
                   </span>
-                  <span className="mt-0.5 hidden text-sm leading-snug text-muted lg:block">{t.audience}</span>
+                  <span className="mt-0.5 hidden text-sm leading-snug text-muted sm:block">{t.blurb}</span>
                 </span>
               </button>
             );
@@ -110,18 +110,38 @@ export function QuestionTabs({ tabs, panels }: { tabs: Tab[]; panels: Record<str
         </div>
       </div>
 
-      {tabs.map((t) => (
-        <div
-          key={t.id}
-          id={`panel-${t.id}`}
-          role="tabpanel"
-          aria-labelledby={`tab-${t.id}`}
-          hidden={t.id !== active}
-          className="pt-8"
-        >
-          {panels[t.id]}
-        </div>
-      ))}
+      {tabs.map((t, i) => {
+        const next = tabs[i + 1];
+        return (
+          <div
+            key={t.id}
+            id={`panel-${t.id}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${t.id}`}
+            hidden={t.id !== active}
+            className="pt-8"
+          >
+            {panels[t.id]}
+            {next && (
+              <div className="mt-10 flex justify-end">
+                <button
+                  onClick={() => {
+                    select(next.id);
+                    barRef.current?.scrollIntoView({ block: "start", behavior: "smooth" });
+                  }}
+                  className="theme-base group inline-flex items-center gap-3 rounded-xl bg-surface px-5 py-3 text-left shadow-lg transition hover:ring-2 hover:ring-primary"
+                >
+                  <span>
+                    <span className="block text-xs font-semibold tracking-wider text-muted uppercase">Next · Q{next.num}</span>
+                    <span className="block font-display font-semibold text-ink">{next.short}</span>
+                  </span>
+                  <ArrowRight className="size-5 text-primary transition group-hover:translate-x-0.5" aria-hidden />
+                </button>
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }

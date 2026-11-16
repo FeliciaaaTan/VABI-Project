@@ -112,7 +112,7 @@ export function Debate() {
 export function Findings() {
   return (
     <Section id="findings" eyebrow="Key findings" title="What the data shows" lead="Placeholder: a one-sentence summary of the overall answer, written once the analysis is final.">
-      <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {findings.map((f, i) => (
           <li key={i} className={`${card} p-6`}>
             <div className="flex items-center justify-between">
@@ -136,18 +136,23 @@ export function Explore() {
       id="explore"
       className="theme-deep"
       eyebrow="Explore the dashboards"
-      title="Three questions, three ways in"
-      lead="Pick the question that matches what you want to know. Every dashboard can be filtered by industry, occupation and AI-exposure tier."
+      title="Four questions, one story"
+      lead="The questions build on each other: who is exposed, what happened to them, who within that is affected most, and what work is changing. Follow them in order or jump to the one you care about."
     >
       <QuestionTabs
-        tabs={questions.map(({ id, num, short, title, audience }) => ({ id, num, short, title, audience }))}
-        panels={{ q1: <QuestionPanel id="q1" />, q2: <QuestionPanel id="q2" />, q3: <QuestionPanel id="q3" /> }}
+        tabs={questions.map(({ id, num, short, title, blurb }) => ({ id, num, short, title, blurb }))}
+        panels={{
+          q1: <QuestionPanel id="q1" />,
+          q2: <QuestionPanel id="q2" />,
+          q3: <QuestionPanel id="q3" />,
+          q4: <QuestionPanel id="q4" />,
+        }}
       />
     </Section>
   );
 }
 
-function QuestionPanel({ id }: { id: "q1" | "q2" | "q3" }) {
+function QuestionPanel({ id }: { id: (typeof questions)[number]["id"] }) {
   const q = questions.find((x) => x.id === id)!;
   return (
     <div>
@@ -158,7 +163,7 @@ function QuestionPanel({ id }: { id: "q1" | "q2" | "q3" }) {
         <h3 className="font-display text-2xl leading-tight font-semibold tracking-tight text-balance text-ink sm:text-3xl">{q.title}</h3>
         <p className="mt-3 text-lg leading-relaxed text-pretty text-muted">{q.lead}</p>
       </header>
-      {id === "q2" && (
+      {(id === "q2" || id === "q3") && (
         <div className="theme-base mb-8">
           <CausationCallout />
         </div>
@@ -168,31 +173,7 @@ function QuestionPanel({ id }: { id: "q1" | "q2" | "q3" }) {
           <VizPanel key={v.id} viz={v} />
         ))}
       </div>
-      {id === "q3" && (
-        <div className="theme-base mt-8">
-          <CausationCallout>
-            JOLTS reports by industry and the Indeed tracker is national-only, so changes in industry demand can&apos;t be
-            linked directly to occupation-level AI exposure.
-          </CausationCallout>
-        </div>
-      )}
     </div>
-  );
-}
-
-/* ── Story ────────────────────────────────────────────────────────────── */
-export function Story() {
-  return (
-    <Section
-      id="story"
-      eyebrow="Guided narrative"
-      title="Walk through the whole story"
-      lead="Our Tableau Story takes you through all three questions in order. Use it if you'd rather be guided than explore on your own."
-    >
-      {vizzesFor("story").map((v) => (
-        <VizPanel key={v.id} viz={v} />
-      ))}
-    </Section>
   );
 }
 
@@ -232,17 +213,28 @@ export function Methodology() {
         <Database className="size-5 text-primary" aria-hidden /> Datasets
       </h3>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {datasets.map((d) => (
-          <a key={d.name} href={d.href} target="_blank" rel="noreferrer" className={`${card} group p-5 hover:border-primary`}>
-            <div className="flex items-start justify-between gap-2">
-              <h4 className="font-semibold text-ink">{d.name}</h4>
-              <ExternalLink className="mt-1 size-3.5 shrink-0 text-muted group-hover:text-primary" aria-hidden />
+        {datasets.map((d) => {
+          const body = (
+            <>
+              <div className="flex items-start justify-between gap-2">
+                <h4 className="font-semibold text-ink">{d.name}</h4>
+                {d.href && <ExternalLink className="mt-1 size-3.5 shrink-0 text-muted group-hover:text-primary" aria-hidden />}
+              </div>
+              <p className="mt-1 text-xs font-medium text-primary">{d.kind}</p>
+              <p className="mt-1 text-xs text-muted">{d.grain}</p>
+              <p className="mt-3 text-sm leading-relaxed text-ink/85">{d.use}</p>
+            </>
+          );
+          return d.href ? (
+            <a key={d.name} href={d.href} target="_blank" rel="noreferrer" className={`${card} group p-5 hover:border-primary`}>
+              {body}
+            </a>
+          ) : (
+            <div key={d.name} className={`${card} border-dashed p-5`}>
+              {body}
             </div>
-            <p className="mt-1 text-xs font-medium text-primary">{d.kind}</p>
-            <p className="mt-1 text-xs text-muted">{d.grain}</p>
-            <p className="mt-3 text-sm leading-relaxed text-ink/85">{d.use}</p>
-          </a>
-        ))}
+          );
+        })}
       </div>
 
       <h3 className="mt-14 mb-4 font-display text-lg font-semibold text-ink">Pipeline</h3>

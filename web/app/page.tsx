@@ -6,7 +6,6 @@ import {
   Footer,
   Hero,
   Methodology,
-  Story,
   Takeaways,
 } from "@/components/sections";
 
@@ -19,7 +18,6 @@ export default function Home() {
         <Debate />
         <Findings />
         <Explore />
-        <Story />
         <Takeaways />
         <Methodology />
       </main>

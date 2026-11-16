@@ -24,12 +24,12 @@ export const nav: NavItem[] = [
     id: "explore",
     label: "Dashboards",
     children: [
-      { id: "q1", label: "Q1 · Exposure & Outcomes" },
-      { id: "q2", label: "Q2 · Before vs After ChatGPT" },
-      { id: "q3", label: "Q3 · Industry Demand & Adoption" },
+      { id: "q1", label: "Q1 · Most Exposed Occupations" },
+      { id: "q2", label: "Q2 · Employment & Wages" },
+      { id: "q3", label: "Q3 · Differences by Age" },
+      { id: "q4", label: "Q4 · Tasks & How They Changed" },
     ],
   },
-  { id: "story", label: "Story" },
   { id: "takeaways", label: "Takeaways" },
   { id: "methodology", label: "Method" },
   { id: "team", label: "Team" },
@@ -37,44 +37,51 @@ export const nav: NavItem[] = [
 
 export const heroStats = [
   { value: "—", label: "of U.S. employment sits in High or Very-high AI-exposure occupations", note: "OEWS 2025 × BLS tiers" },
-  { value: "—", label: "of job postings mention AI or generative AI (latest month)", note: "Indeed Hiring Lab" },
-  { value: "—", label: "employment change in Very-high-exposure occupations vs their pre-ChatGPT trend", note: "OEWS 2023–2025" },
+  { value: "—", label: "employment change in Very-high-exposure occupations, 2023–2025 vs earlier periods", note: "OEWS 2013–2025" },
+  { value: "—", label: "change in young workers' employment in the most exposed occupations", note: "Age-group data (source TBC)" },
 ];
 
+/** The four research questions, in story order. They drive the dashboard tabs. */
 export const questions = [
   {
     id: "q1",
     num: 1,
-    short: "Exposure & Outcomes",
-    title: "Do more AI-exposed occupations show different employment and wage trends?",
-    lead: "Employment and median wages across occupations grouped by the BLS's four AI-exposure tiers, from 2013 to 2025.",
-    audience: "Start here if you're a job seeker or worker",
+    short: "Most Exposed Occupations",
+    title: "Which occupations are most exposed to AI?",
+    lead: "Occupations ranked by the BLS's four AI-exposure tiers and their continuous AIOE score, sized by how many people work in them.",
+    blurb: "Start here: who is exposed",
   },
   {
     id: "q2",
     num: 2,
-    short: "Before vs After ChatGPT",
-    title: "Did highly exposed occupations break from their own pre-ChatGPT trend?",
-    lead: "We compare each tier against its own earlier periods (2013–2016, 2016–2019 and the pre-ChatGPT, COVID-era 2019–2022) instead of assuming that any post-2022 decline is caused by AI.",
-    audience: "Start here if you're a researcher or policymaker",
+    short: "Employment & Wages",
+    title: "What happened to employment and wages in those exposed occupations?",
+    lead: "Employment and median wages by exposure tier from 2013 to 2025. Post-ChatGPT years are compared against three earlier periods, including the COVID era, instead of assuming any change is caused by AI.",
+    blurb: "What actually happened, 2013–2025",
   },
   {
     id: "q3",
     num: 3,
-    short: "Industry Demand & Adoption",
-    title: "How is hiring demand shifting across industries as AI adoption grows?",
-    lead: "Job openings, hires and separations by industry, read alongside the share of postings that mention AI and generative AI.",
-    audience: "Start here if you're an employer or workforce planner",
+    short: "Differences by Age",
+    title: "Are there differences in those trends across age groups?",
+    lead: "The same employment and wage trends split by age group, to see whether younger, early-career workers in exposed occupations are affected differently from older workers.",
+    blurb: "Young vs older workers",
+  },
+  {
+    id: "q4",
+    num: 4,
+    short: "Tasks & How They Changed",
+    title: "What kinds of work and tasks are impacted, and how have they changed?",
+    lead: "Zooming in from occupations to the tasks inside them: which tasks are most exposed to AI, and how the work and skills asked for have shifted.",
+    blurb: "From jobs to tasks",
   },
 ] as const;
 
 export const findings = [
-  { q: "Q1", stat: "—", title: "Placeholder finding headline", body: "Placeholder: one or two sentences summarising the finding and the viz that supports it." },
-  { q: "Q1", stat: "—", title: "Placeholder finding headline", body: "Placeholder: one or two sentences summarising the finding and the viz that supports it." },
-  { q: "Q2", stat: "—", title: "Placeholder finding headline", body: "Placeholder: one or two sentences summarising the finding and the viz that supports it." },
-  { q: "Q2", stat: "—", title: "Placeholder finding headline", body: "Placeholder: one or two sentences summarising the finding and the viz that supports it." },
-  { q: "Q3", stat: "—", title: "Placeholder finding headline", body: "Placeholder: one or two sentences summarising the finding and the viz that supports it." },
-  { q: "Q3", stat: "—", title: "Placeholder finding headline", body: "Placeholder: one or two sentences summarising the finding and the viz that supports it." },
+  { q: "Q1", stat: "—", title: "Placeholder finding headline", body: "Placeholder: which occupations are most exposed, and how many workers that covers." },
+  { q: "Q2", stat: "—", title: "Placeholder finding headline", body: "Placeholder: how employment and wages in exposed occupations moved compared with earlier periods." },
+  { q: "Q3", stat: "—", title: "Placeholder finding headline", body: "Placeholder: whether the trend differs for younger vs older workers." },
+  { q: "Q4", stat: "—", title: "Placeholder finding headline", body: "Placeholder: which tasks are most affected and how the work has changed." },
 ];
 
 /** Evidence summarised from the proposal's related-works section. */
@@ -87,31 +94,32 @@ export const evidence = [
 ];
 
 export const takeaways = [
-  { who: "Job seekers & workers", points: ["Placeholder: what the exposure-tier trends mean for career choices.", "Placeholder: high exposure ≠ disappearing jobs. Point to the evidence."] },
-  { who: "Employers & planners", points: ["Placeholder: where hiring demand is moving across industries.", "Placeholder: how AI mentions in postings are trending."] },
-  { who: "Policymakers", points: ["Placeholder: which signals to monitor (coverage of tiers, wage divergence).", "Placeholder: why causal claims need more than these trends."] },
+  { who: "Job seekers & workers", points: ["Placeholder: what exposure means (and doesn't mean) for your occupation.", "Placeholder: what the age-group differences mean for early-career workers."] },
+  { who: "Employers & planners", points: ["Placeholder: which tasks are changing inside exposed roles.", "Placeholder: what that implies for hiring and training."] },
+  { who: "Policymakers", points: ["Placeholder: which groups and occupations to monitor.", "Placeholder: why causal claims need more than these trends."] },
 ];
 
-export const datasets = [
+export const datasets: { name: string; kind: string; grain: string; use: string; href?: string }[] = [
   { name: "BLS AI Exposure Categories", kind: "Static", grain: "831 occupations · SOC 2018", use: "Four exposure tiers (Low → Very high) that drive the tier filter.", href: "https://www.bls.gov/emp/publications/ai-exposure-categories.htm" },
   { name: "AI Occupational Exposure (AIOE / AIIE)", kind: "Static", grain: "SOC occupations · NAICS industries", use: "Continuous exposure scores to rank occupations within a tier and to score industries.", href: "https://doi.org/10.1002/smj.3286" },
   { name: "BLS OEWS", kind: "Dynamic · annual", grain: "~830 occupations · May reference", use: "Employment and median wages, the occupation-level outcomes.", href: "https://www.bls.gov/oes/" },
-  { name: "BLS JOLTS", kind: "Dynamic · monthly", grain: "Industry (NAICS)", use: "Job openings, hires and separations for the industry comparison.", href: "https://www.bls.gov/jlt/" },
   { name: "Indeed Hiring Lab AI Tracker", kind: "Dynamic · monthly", grain: "U.S. national · CC BY 4.0", use: "Share of postings mentioning AI / GenAI, used as a national adoption signal.", href: "https://github.com/hiring-lab/ai-tracker" },
+  { name: "Placeholder: age-group data (source TBC)", kind: "Dynamic", grain: "Occupation × age group", use: "Placeholder: employment (and wages) by age group, used for Q3." },
+  { name: "Placeholder: task data (source TBC)", kind: "Static / dynamic", grain: "Tasks within occupations", use: "Placeholder: task-level exposure and how tasks have changed, used for Q4." },
 ];
 
 export const pipeline = [
   { step: "Collect", text: "Pull data from the BLS public API and download the static tables and the Hiring Lab CSV." },
   { step: "Clean", text: "Standardise codes and years and handle suppressed values (Python · pandas)." },
   { step: "Join", text: "Merge occupations on 6-digit SOC codes and industries on NAICS codes." },
-  { step: "Visualise", text: "Build interactive dashboards and a story in Tableau, then publish to Tableau Public." },
+  { step: "Visualise", text: "Build interactive dashboards in Tableau, then publish to Tableau Public." },
 ];
 
 export const limitations = [
   "These are descriptive trends. Differences between tiers are correlations, not proof that AI caused them.",
   "Some highly exposed occupations were already declining before ChatGPT (NY Fed), so a pre/post difference may continue an older trend.",
   "The Indeed AI Tracker is national-only, so it cannot be split by industry or occupation.",
-  "JOLTS has no occupation detail, so industry-level demand cannot be linked directly to occupation-level exposure.",
+  "Age-group differences can reflect other forces too, such as fewer entry-level openings across the economy.",
   "Exposure tiers use the 2018 SOC structure. Occupations that were reclassified may not map cleanly.",
   "The post-ChatGPT period has only three annual OEWS observations (2023–2025), against three earlier comparison periods going back to 2013.",
 ];
@@ -122,7 +130,6 @@ export const glossary = [
   { term: "AIOE", def: "AI Occupational Exposure index (Felten, Raj & Seamans), which gives each occupation a continuous exposure score." },
   { term: "AIIE", def: "AI Industry Exposure, the industry-level version of AIOE." },
   { term: "OEWS", def: "Occupational Employment and Wage Statistics (BLS), annual employment and wages by occupation." },
-  { term: "JOLTS", def: "Job Openings and Labor Turnover Survey (BLS), monthly openings, hires and separations by industry." },
   { term: "Exposure tier", def: "BLS's four-level classification (Low, Moderate, High, Very high), built from five external exposure measures." },
 ];
 
