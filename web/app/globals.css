@@ -149,3 +149,41 @@ body {
     transform: translateX(100%);
   }
 }
+
+/* ── Typing title (components/ui/TypingText.tsx) ─────────────────────── */
+/* Hide the not-yet-typed title once JS is known to be running, so the full
+   text never flashes before the animation starts. */
+.js .typing-text[data-pending] {
+  visibility: hidden;
+}
+
+.typing-caret {
+  animation: caret-blink 1s step-end infinite;
+}
+
+/* After typing, blink a few more times, then fade the caret out. */
+.typing-caret-done {
+  animation:
+    caret-blink 1s step-end 3,
+    caret-out 0.4s ease 3s forwards;
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes caret-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typing-caret,
+  .typing-caret-done {
+    animation: none;
+    opacity: 0;
+  }
+}

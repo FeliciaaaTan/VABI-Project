@@ -8,8 +8,11 @@ const STORAGE_KEY = "theme";
 const CHANGE_EVENT = "themechange";
 const DARK_QUERY = "(prefers-color-scheme: dark)";
 
-/** Inline script for <head>: applies a saved choice before first paint (no flash). */
-export const themeInitScript = `try{var t=localStorage.getItem("${STORAGE_KEY}");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
+/**
+ * Inline script for <head>: marks JS as available (used by TypingText) and
+ * applies a saved theme before first paint (no flash).
+ */
+export const themeInitScript = `document.documentElement.classList.add("js");try{var t=localStorage.getItem("${STORAGE_KEY}");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
 
 /** The theme in effect: the user's pick if any, otherwise the system setting. */
 const getTheme = (): Theme =>

@@ -4,6 +4,14 @@ import Script from "next/script";
 import "./globals.css";
 import { themeInitScript } from "@/components/ui/ThemeToggle";
 
+/**
+ * Runs before first paint: on a page *reload*, start from the top instead of
+ * restoring the old scroll position, and drop any #q1–#q4 tab hash so the
+ * page doesn't jump back down. Fresh visits to a shared link (e.g. /#q2) are
+ * untouched, because their navigation type is "navigate", not "reload".
+ */
+const scrollResetScript = `try{if("scrollRestoration"in history)history.scrollRestoration="manual";var n=performance.getEntriesByType("navigation")[0];if(n&&n.type==="reload"){if(location.hash)history.replaceState(null,"",location.pathname+location.search);window.scrollTo(0,0)}}catch(e){}`;
+
 const body = Inter({ variable: "--font-body", subsets: ["latin"] });
 const heading = Space_Grotesk({ variable: "--font-heading", subsets: ["latin"] });
 
@@ -19,6 +27,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: scrollResetScript }} />
       </head>
       <body className={`${body.variable} ${heading.variable} font-sans antialiased`}>
         {children}

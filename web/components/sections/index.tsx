@@ -18,6 +18,8 @@ import { VizPanel } from "../tableau/VizPanel";
 import { CausationCallout } from "../ui/CausationCallout";
 import { ChatGPTTimeline } from "../ui/ChatGPTTimeline";
 import { QuestionTabs } from "../ui/QuestionTabs";
+import { TypingText } from "../ui/TypingText";
+import { Reveal } from "../ui/Reveal";
 
 const card = "rounded-2xl border border-line bg-surface";
 
@@ -35,37 +37,39 @@ export function Hero() {
           {site.course} · {site.team}
         </p>
         <h1 className="max-w-4xl font-display text-4xl leading-[1.05] font-bold tracking-tight text-balance text-ink sm:text-6xl lg:text-7xl">
-          {site.title}
+          <TypingText text={site.title} />
         </h1>
-        <p className="mt-4 font-display text-xl text-muted sm:text-2xl">{site.subtitle}</p>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-ink/80">{site.pitch}</p>
+        <Reveal delay={0.2}>
+          <p className="mt-4 font-display text-xl text-muted sm:text-2xl">{site.subtitle}</p>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-ink/80">{site.pitch}</p>
+        </Reveal>
 
-        <div className="mt-8 flex flex-wrap gap-3">
+        <Reveal delay={0.35} className="mt-8 flex flex-wrap gap-3">
           <a href="#explore" className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 font-semibold text-on-primary hover:opacity-90">
             Explore the data <ArrowDown className="size-4" aria-hidden />
           </a>
           <a href="#methodology" className="inline-flex items-center gap-2 rounded-xl border border-line bg-surface px-5 py-3 font-semibold text-ink hover:border-primary">
             How we did it
           </a>
-        </div>
+        </Reveal>
 
         <dl className="mt-14 grid gap-4 sm:grid-cols-3">
-          {heroStats.map((s) => (
-            <div key={s.label} className={`${card} p-5`}>
+          {heroStats.map((s, i) => (
+            <Reveal key={s.label} delay={0.5 + i * 0.1} className={`${card} p-5`}>
               <dd className="font-display text-4xl font-bold text-primary tabular-nums">{s.value}</dd>
               <dt className="mt-2 text-[15px] leading-snug text-ink">{s.label}</dt>
               <p className="mt-2 text-xs text-muted">
                 {s.value === "—" ? "Placeholder stat · " : ""}
                 {s.note}
               </p>
-            </div>
+            </Reveal>
           ))}
         </dl>
 
-        <div className={`${card} mt-6 px-5 pt-6 pb-5 sm:px-8`}>
+        <Reveal delay={0.8} className={`${card} mt-6 px-5 pt-6 pb-5 sm:px-8`}>
           <p className="mb-4 text-xs font-semibold tracking-wider text-muted uppercase">Analysis window</p>
           <ChatGPTTimeline />
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -93,8 +97,8 @@ export function Debate() {
 
       <h3 className="mt-14 mb-5 font-display text-xl font-semibold text-ink">What existing research says</h3>
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {evidence.map((e) => (
-          <li key={e.cite} className={`${card} flex flex-col p-5`}>
+        {evidence.map((e, i) => (
+          <Reveal as="li" key={e.cite} delay={i * 0.07} className={`${card} flex flex-col p-5`}>
             <span className="font-display text-2xl font-bold text-primary">{e.stat}</span>
             <p className="mt-2 flex-1 text-sm leading-relaxed text-ink">{e.text}</p>
             <p className="mt-3 text-xs text-muted">{e.cite}</p>
@@ -107,7 +111,7 @@ export function Debate() {
             >
               See more <ExternalLink className="size-3.5" aria-hidden />
             </a>
-          </li>
+          </Reveal>
         ))}
       </ul>
 
@@ -126,7 +130,7 @@ export function Findings() {
     <Section id="findings" eyebrow="Key findings" title="What the data shows" lead="Placeholder: a one-sentence summary of the overall answer, written once the analysis is final.">
       <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {findings.map((f, i) => (
-          <li key={i} className={`${card} p-6`}>
+          <Reveal as="li" key={i} delay={i * 0.08} className={`${card} p-6`}>
             <div className="flex items-center justify-between">
               <span className="font-display text-sm font-semibold text-muted tabular-nums">{String(i + 1).padStart(2, "0")}</span>
               <span className="rounded-full bg-primary-soft px-2.5 py-0.5 text-xs font-semibold text-primary">{f.q}</span>
@@ -134,7 +138,7 @@ export function Findings() {
             <p className="mt-4 font-display text-4xl font-bold text-ink tabular-nums">{f.stat}</p>
             <h3 className="mt-2 font-display text-lg font-semibold text-ink">{f.title}</h3>
             <p className="mt-2 text-[15px] leading-relaxed text-muted">{f.body}</p>
-          </li>
+          </Reveal>
         ))}
       </ol>
     </Section>
@@ -194,8 +198,8 @@ export function Takeaways() {
   return (
     <Section id="takeaways" eyebrow="So what?" title="What it means for you" lead="Not a forecast, but evidence to weigh. So far AI looks less like a wave of job losses and more like a slow reshaping of tasks, felt first by young workers trying to get in.">
       <div className="grid gap-4 md:grid-cols-3">
-        {takeaways.map((t) => (
-          <div key={t.who} className={`${card} p-6`}>
+        {takeaways.map((t, i) => (
+          <Reveal key={t.who} delay={i * 0.1} className={`${card} p-6`}>
             <h3 className="font-display text-lg font-semibold text-ink">{t.who}</h3>
             <ul className="mt-4 flex flex-col gap-3">
               {t.points.map((p) => (
@@ -205,7 +209,7 @@ export function Takeaways() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         ))}
       </div>
     </Section>
@@ -252,11 +256,11 @@ export function Methodology() {
       <h3 className="mt-14 mb-4 font-display text-lg font-semibold text-ink">Pipeline</h3>
       <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {pipeline.map((p, i) => (
-          <li key={p.step} className={`${card} p-5`}>
+          <Reveal as="li" key={p.step} delay={i * 0.08} className={`${card} p-5`}>
             <span className="font-display text-sm font-semibold text-muted">Step {i + 1}</span>
             <p className="mt-1 font-display text-lg font-semibold text-ink">{p.step}</p>
             <p className="mt-2 text-sm leading-relaxed text-muted">{p.text}</p>
-          </li>
+          </Reveal>
         ))}
       </ol>
 
