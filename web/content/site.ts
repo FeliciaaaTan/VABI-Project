@@ -91,12 +91,34 @@ export const evidence = [
   { stat: "≈0", text: "Little measurable change in employment or earnings so far.", cite: "Humlum & Vestergaard (2025)", href: "https://www.nber.org/papers/w33777" },
   { stat: "pre-2022", text: "Demand for highly exposed jobs was already declining before ChatGPT, which makes attribution hard.", cite: "NY Fed, Audoly et al. (2026)", href: "https://libertystreeteconomics.newyorkfed.org/2026/05/do-job-postings-show-early-labor-market-effects-of-ai/" },
   { stat: "−1pp", text: "Employment share of young workers (20–24) in the most exposed jobs fell after ChatGPT, though the effect may not be causal.", cite: "Dallas Fed, Atkinson & Yamco (2026)", href: "https://www.dallasfed.org/research/economics/2026/0106" },
+  { stat: "+200%", text: "Corporate AI investment exploded in 2025: private AI investment more than doubled, and generative-AI funding grew over 200% as firms rushed to integrate language models, automation and AI agents into their businesses.", cite: "Forbes Advisor, AI Statistics (2026)", href: "https://www.forbes.com/advisor/business/ai-statistics/" },
 ];
 
 export const takeaways = [
-  { who: "Job seekers & workers", points: ["Placeholder: what exposure means (and doesn't mean) for your occupation.", "Placeholder: what the age-group differences mean for early-career workers."] },
-  { who: "Employers & planners", points: ["Placeholder: which tasks are changing inside exposed roles.", "Placeholder: what that implies for hiring and training."] },
-  { who: "Policymakers", points: ["Placeholder: which groups and occupations to monitor.", "Placeholder: why causal claims need more than these trends."] },
+  {
+    who: "Job seekers & workers",
+    points: [
+      "Exposure isn't the same as job loss. Only about 3% of U.S. jobs are highly exposed, and the biggest decline, in office & admin work, started before ChatGPT.",
+      "If you're early in your career, watch most closely. Young workers in exposed jobs fell behind both their peers and older colleagues, especially in jobs that usually need a degree.",
+      "Firms mostly train the staff they already have, so getting a foot in the door and learning to work with AI on the job both matter.",
+    ],
+  },
+  {
+    who: "Employers & planners",
+    points: [
+      "You're not alone in upskilling: at every firm size, AI-using businesses train current staff far more often than they hire AI talent.",
+      "Look at tasks, not job titles. In most of the most exposed jobs, AI tends to do the task rather than assist, so roles may need to be redesigned around the work that's left.",
+      "Entry-level roles are where the effects show first. Trimming junior hiring in exposed jobs could thin out the talent pipeline you'll need later.",
+    ],
+  },
+  {
+    who: "Researchers",
+    points: [
+      "Revisit after 2025. Businesses have been integrating AI since ChatGPT's release in late 2022, and the pace accelerated sharply in 2024–2025. Job effects usually lag behind, and our data stops at 2025, so later OEWS and CPS releases may show a stronger trend.",
+      "Look beyond headline employment to age. The clearest signal so far is among young workers (20–24) in exposed jobs, especially degree jobs.",
+      "Study tasks, not just occupations. Which tasks AI automates vs assists within the same job may explain who keeps getting hired and who doesn't.",
+    ],
+  },
 ];
 
 export const datasets: { name: string; kind: string; grain: string; use: string; href?: string }[] = [
@@ -121,6 +143,7 @@ export const limitations = [
   "The Indeed AI Tracker is national-only, so it cannot be split by industry or occupation.",
   "Age-group differences can reflect other forces too, such as fewer entry-level openings across the economy.",
   "Exposure tiers use the 2018 SOC structure. Occupations that were reclassified may not map cleanly.",
+  "Our data ends in 2025, but businesses' AI integration only accelerated sharply in 2024–2025. Effects on jobs and wages that take longer to appear won't show up yet.",
   "OEWS estimates pool three years of surveys, so we compare non-overlapping periods only. That leaves a single post-ChatGPT period (2022–2025) to compare against three earlier ones.",
 ];
 

@@ -92,7 +92,7 @@ export function Debate() {
       </div>
 
       <h3 className="mt-14 mb-5 font-display text-xl font-semibold text-ink">What existing research says</h3>
-      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {evidence.map((e) => (
           <li key={e.cite} className={`${card} flex flex-col p-5`}>
             <span className="font-display text-2xl font-bold text-primary">{e.stat}</span>
@@ -192,7 +192,7 @@ function QuestionPanel({ id }: { id: (typeof questions)[number]["id"] }) {
 /* ── Takeaways ────────────────────────────────────────────────────────── */
 export function Takeaways() {
   return (
-    <Section id="takeaways" eyebrow="So what?" title="What it means for you" lead="Placeholder: frame the takeaways as evidence to weigh, not predictions.">
+    <Section id="takeaways" eyebrow="So what?" title="What it means for you" lead="Not a forecast, but evidence to weigh. So far AI looks less like a wave of job losses and more like a slow reshaping of tasks, felt first by young workers trying to get in.">
       <div className="grid gap-4 md:grid-cols-3">
         {takeaways.map((t) => (
           <div key={t.who} className={`${card} p-6`}>
