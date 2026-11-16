@@ -77,7 +77,7 @@ export const vizzes: Viz[] = [
     kind: "dashboard",
     src: "https://public.tableau.com/views/IS428-G1T3-Project/D4InsidetheExposedJobs",
     height: { desktop: 840, mobile: 640 },
-    interact: "Compare job families across periods in the heatmap, then hover the scatter and line charts to see individual occupations.",
+    interact: "Compare job families across periods in the heatmap, then hover and select an occupation in the scatter plot to see its individual trend.",
     what: "The same trends broken down into job families and individual highly exposed occupations.",
     insight:
       "The overall decline isn't what it seems. It is dominated by Office & Admin Support, and most of these declining trends had already started before COVID and ChatGPT. So we can't conclude that AI caused them. They seem more linked to the nature of the work, which is easy to automate.",
