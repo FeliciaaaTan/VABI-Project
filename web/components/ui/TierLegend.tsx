@@ -1,13 +1,13 @@
 import { tiers } from "@/content/site";
 
 const swatch: Record<(typeof tiers)[number]["key"], string> = {
-  low: "bg-tier-low",
-  moderate: "bg-tier-moderate",
   high: "bg-tier-high",
-  vhigh: "bg-tier-vhigh",
+  moderate: "bg-tier-moderate",
+  low: "bg-tier-low",
+  none: "bg-tier-none",
 };
 
-/** Legend for the four BLS AI-exposure tiers, using the same colours as the Tableau workbooks. */
+/** Legend for the AI-exposure levels, using the same colours as the Tableau workbook. */
 export function TierLegend({ className = "" }: { className?: string }) {
   return (
     <div className={`flex flex-wrap items-center gap-x-4 gap-y-2 text-sm ${className}`}>

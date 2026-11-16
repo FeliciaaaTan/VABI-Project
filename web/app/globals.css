@@ -18,10 +18,10 @@
   --signal-soft: #fdeee4;
   --viz-surface: #ffffff;
 
-  --tier-low: #c7d2fe;
-  --tier-moderate: #8b93f5;
-  --tier-high: #4f46e5;
-  --tier-vhigh: #27207a;
+  --tier-high: #e15759;
+  --tier-moderate: #f28e2b;
+  --tier-low: #4e79a7;
+  --tier-none: #bab0ac;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -84,10 +84,10 @@
   --color-on-primary: var(--on-primary);
   --color-signal: var(--signal);
   --color-signal-soft: var(--signal-soft);
-  --color-tier-low: var(--tier-low);
-  --color-tier-moderate: var(--tier-moderate);
   --color-tier-high: var(--tier-high);
-  --color-tier-vhigh: var(--tier-vhigh);
+  --color-tier-moderate: var(--tier-moderate);
+  --color-tier-low: var(--tier-low);
+  --color-tier-none: var(--tier-none);
   --font-sans: var(--font-body);
   --font-display: var(--font-heading);
 }

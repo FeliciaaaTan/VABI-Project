@@ -15,8 +15,9 @@ const tone = {
 
 /**
  * The analysis window on a continuous year axis, with the comparison periods
- * drawn as spans and ChatGPT's release marked. OEWS uses a May reference
- * period, so May 2022 is pre-ChatGPT and May 2023 onward is post.
+ * drawn as spans and ChatGPT's release marked. Each span shows the employment
+ * index for high-exposure jobs (2013–2016 = 100) and its change from the
+ * previous period.
  */
 export function ChatGPTTimeline() {
   return (
@@ -34,21 +35,34 @@ export function ChatGPTTimeline() {
           <span className="w-0.5 flex-1 bg-signal" />
         </div>
 
-        {/* period spans */}
-        <div className="relative h-9">
-          {periods.map((p) => (
-            <div
-              key={`${p.from}-${p.to}`}
-              className={`absolute top-0 flex h-full items-center justify-center overflow-hidden rounded-md px-1 text-[11px] font-semibold whitespace-nowrap sm:text-xs ${tone[p.tone]}`}
-              style={{ left: `calc(${x(p.from)}% + 2px)`, width: `calc(${x(p.to) - x(p.from)}% - 4px)` }}
-              title={`${p.label}: ${p.from}–${p.to}`}
-            >
-              <span className="truncate">
-                <span className="hidden md:inline">{p.label} · </span>
-                {p.from}–{String(p.to).slice(2)}
-              </span>
-            </div>
-          ))}
+        {/* period spans (above the marker line so it doesn't cross their text) */}
+        <div className="relative z-20 h-16">
+          {periods.map((p, i) => {
+            const prev = periods[i - 1];
+            const change = prev ? (p.highIndex / prev.highIndex - 1) * 100 : null;
+            return (
+              <div
+                key={`${p.from}-${p.to}`}
+                className={`absolute top-0 flex h-full flex-col items-center justify-center overflow-hidden rounded-md px-1 text-center whitespace-nowrap ${tone[p.tone]}`}
+                style={{ left: `calc(${x(p.from)}% + 2px)`, width: `calc(${x(p.to) - x(p.from)}% - 4px)` }}
+                title={`${p.label} ${p.from}–${p.to}: employment index ${p.highIndex}`}
+              >
+                <span className="max-w-full truncate text-[11px] font-semibold sm:text-xs">
+                  <span className="hidden md:inline">{p.label} · </span>
+                  {p.from}–{String(p.to).slice(2)}
+                </span>
+                <span className="mt-0.5 flex items-baseline gap-1.5">
+                  <span className="font-display text-base font-bold tabular-nums sm:text-lg">{p.highIndex.toFixed(1)}</span>
+                  {change !== null && (
+                    <span className="hidden text-[11px] font-semibold tabular-nums sm:inline">
+                      {change >= 0 ? "▲" : "▼"}
+                      {Math.abs(change).toFixed(1)}%
+                    </span>
+                  )}
+                </span>
+              </div>
+            );
+          })}
         </div>
 
         {/* year axis */}
@@ -78,7 +92,9 @@ export function ChatGPTTimeline() {
             <span className="font-semibold text-ink">{p.label}</span> {p.from}–{p.to}
           </span>
         ))}
-        <span className="basis-full sm:basis-auto sm:ml-auto">OEWS estimates use a May reference period</span>
+        <span className="basis-full sm:basis-auto sm:ml-auto">
+          Numbers: employment in high-exposure jobs, index 2013–2016 = 100
+        </span>
       </figcaption>
     </figure>
   );

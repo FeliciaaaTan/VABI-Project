@@ -54,7 +54,10 @@ export function Hero() {
             <div key={s.label} className={`${card} p-5`}>
               <dd className="font-display text-4xl font-bold text-primary tabular-nums">{s.value}</dd>
               <dt className="mt-2 text-[15px] leading-snug text-ink">{s.label}</dt>
-              <p className="mt-2 text-xs text-muted">Placeholder stat · {s.note}</p>
+              <p className="mt-2 text-xs text-muted">
+                {s.value === "—" ? "Placeholder stat · " : ""}
+                {s.note}
+              </p>
             </div>
           ))}
         </dl>
@@ -95,6 +98,15 @@ export function Debate() {
             <span className="font-display text-2xl font-bold text-primary">{e.stat}</span>
             <p className="mt-2 flex-1 text-sm leading-relaxed text-ink">{e.text}</p>
             <p className="mt-3 text-xs text-muted">{e.cite}</p>
+            <a
+              href={e.href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`See more: ${e.cite} (opens in a new tab)`}
+              className="mt-3 inline-flex items-center gap-1 self-start text-sm font-semibold text-primary hover:underline"
+            >
+              See more <ExternalLink className="size-3.5" aria-hidden />
+            </a>
           </li>
         ))}
       </ul>

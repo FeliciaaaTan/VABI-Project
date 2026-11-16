@@ -36,9 +36,9 @@ export const nav: NavItem[] = [
 ];
 
 export const heroStats = [
-  { value: "—", label: "of U.S. employment sits in High or Very-high AI-exposure occupations", note: "OEWS 2025 × BLS tiers" },
-  { value: "—", label: "employment change in Very-high-exposure occupations, 2023–2025 vs earlier periods", note: "OEWS 2013–2025" },
-  { value: "—", label: "change in young workers' employment in the most exposed occupations", note: "Age-group data (source TBC)" },
+  { value: "~3%", label: "of U.S. jobs are highly exposed to AI", note: "Anthropic Economic Index × OEWS 2025" },
+  { value: "−5.6%", label: "employment change in high-exposure jobs after ChatGPT (2022–25), after growing in earlier periods", note: "OEWS · employment index 2013–2016 = 100" },
+  { value: "—", label: "change in young workers' employment in the most exposed occupations", note: "CPS · Age" },
 ];
 
 /** The four research questions, in story order. They drive the dashboard tabs. */
@@ -78,19 +78,19 @@ export const questions = [
 ] as const;
 
 export const findings = [
-  { q: "Q1", stat: "—", title: "Placeholder finding headline", body: "Placeholder: which occupations are most exposed, and how many workers that covers." },
-  { q: "Q2", stat: "—", title: "Placeholder finding headline", body: "Placeholder: how employment and wages in exposed occupations moved compared with earlier periods." },
+  { q: "Q1", stat: "~3%", title: "Few jobs are highly exposed", body: "Despite the hype, only about 3% of U.S. jobs are highly exposed to AI, according to Anthropic's Economic Index." },
+  { q: "Q2", stat: "↓ jobs", title: "Employment fell, wages held", body: "Employment in highly exposed occupations declined, mostly in Office & Admin Support, which was already falling before COVID and ChatGPT. Wages showed no significant change." },
   { q: "Q3", stat: "—", title: "Placeholder finding headline", body: "Placeholder: whether the trend differs for younger vs older workers." },
   { q: "Q4", stat: "—", title: "Placeholder finding headline", body: "Placeholder: which tasks are most affected and how the work has changed." },
 ];
 
 /** Evidence summarised from the proposal's related-works section. */
 export const evidence = [
-  { stat: "23%", text: "of employed U.S. respondents used generative AI for work in the previous week, within two years of ChatGPT's release.", cite: "Bick, Blandin & Deming (2024)" },
-  { stat: "↑", text: "Productivity improved when workers had AI assistance.", cite: "Brynjolfsson, Li & Raymond (2023)" },
-  { stat: "≈0", text: "Little measurable change in employment or earnings so far.", cite: "Humlum & Vestergaard (2025)" },
-  { stat: "pre-2022", text: "Demand for highly exposed jobs was already declining before ChatGPT, which makes attribution hard.", cite: "NY Fed, Audoly et al. (2026)" },
-  { stat: "−1pp", text: "Employment share of young workers (20–24) in the most exposed jobs fell after ChatGPT, though the effect may not be causal.", cite: "Dallas Fed, Atkinson & Yamco (2026)" },
+  { stat: "23%", text: "of employed U.S. respondents used generative AI for work in the previous week, within two years of ChatGPT's release.", cite: "Bick, Blandin & Deming (2024)", href: "https://www.nber.org/papers/w32966" },
+  { stat: "↑", text: "Productivity improved when workers had AI assistance.", cite: "Brynjolfsson, Li & Raymond (2023)", href: "https://www.nber.org/papers/w31161" },
+  { stat: "≈0", text: "Little measurable change in employment or earnings so far.", cite: "Humlum & Vestergaard (2025)", href: "https://www.nber.org/papers/w33777" },
+  { stat: "pre-2022", text: "Demand for highly exposed jobs was already declining before ChatGPT, which makes attribution hard.", cite: "NY Fed, Audoly et al. (2026)", href: "https://libertystreeteconomics.newyorkfed.org/2026/05/do-job-postings-show-early-labor-market-effects-of-ai/" },
+  { stat: "−1pp", text: "Employment share of young workers (20–24) in the most exposed jobs fell after ChatGPT, though the effect may not be causal.", cite: "Dallas Fed, Atkinson & Yamco (2026)", href: "https://www.dallasfed.org/research/economics/2026/0106" },
 ];
 
 export const takeaways = [
@@ -104,8 +104,8 @@ export const datasets: { name: string; kind: string; grain: string; use: string;
   { name: "AI Occupational Exposure (AIOE / AIIE)", kind: "Static", grain: "SOC occupations · NAICS industries", use: "Continuous exposure scores to rank occupations within a tier and to score industries.", href: "https://doi.org/10.1002/smj.3286" },
   { name: "BLS OEWS", kind: "Dynamic · annual", grain: "~830 occupations · May reference", use: "Employment and median wages, the occupation-level outcomes.", href: "https://www.bls.gov/oes/" },
   { name: "Indeed Hiring Lab AI Tracker", kind: "Dynamic · monthly", grain: "U.S. national · CC BY 4.0", use: "Share of postings mentioning AI / GenAI, used as a national adoption signal.", href: "https://github.com/hiring-lab/ai-tracker" },
-  { name: "Placeholder: age-group data (source TBC)", kind: "Dynamic", grain: "Occupation × age group", use: "Placeholder: employment (and wages) by age group, used for Q3." },
-  { name: "Placeholder: task data (source TBC)", kind: "Static / dynamic", grain: "Tasks within occupations", use: "Placeholder: task-level exposure and how tasks have changed, used for Q4." },
+  { name: "CPS · Age (Current Population Survey)", kind: "Dynamic", grain: "Occupation × age group", use: "Employment by age group in exposed occupations, used for Q3.", href: "https://www.bls.gov/cps/" },
+  { name: "BTOS (Business Trends and Outlook Survey)", kind: "Dynamic", grain: "U.S. businesses", use: "How businesses report using AI, used for Q4.", href: "https://www.census.gov/hfp/btos/" },
 ];
 
 export const pipeline = [
@@ -121,7 +121,7 @@ export const limitations = [
   "The Indeed AI Tracker is national-only, so it cannot be split by industry or occupation.",
   "Age-group differences can reflect other forces too, such as fewer entry-level openings across the economy.",
   "Exposure tiers use the 2018 SOC structure. Occupations that were reclassified may not map cleanly.",
-  "The post-ChatGPT period has only three annual OEWS observations (2023–2025), against three earlier comparison periods going back to 2013.",
+  "OEWS estimates pool three years of surveys, so we compare non-overlapping periods only. That leaves a single post-ChatGPT period (2022–2025) to compare against three earlier ones.",
 ];
 
 export const glossary = [
@@ -130,6 +130,8 @@ export const glossary = [
   { term: "AIOE", def: "AI Occupational Exposure index (Felten, Raj & Seamans), which gives each occupation a continuous exposure score." },
   { term: "AIIE", def: "AI Industry Exposure, the industry-level version of AIOE." },
   { term: "OEWS", def: "Occupational Employment and Wage Statistics (BLS), annual employment and wages by occupation." },
+  { term: "CPS", def: "Current Population Survey (BLS & Census), the monthly household survey behind U.S. employment by age." },
+  { term: "BTOS", def: "Business Trends and Outlook Survey (Census Bureau), which asks businesses how they use AI." },
   { term: "Exposure tier", def: "BLS's four-level classification (Low, Moderate, High, Very high), built from five external exposure measures." },
 ];
 
@@ -141,19 +143,24 @@ export const members = [
   { name: "Tan Zu Wei", email: "name@example.com" },
 ];
 
+/** AI-exposure levels, in the order and colours used in the Tableau workbook. */
 export const tiers = [
-  { key: "low", label: "Low" },
-  { key: "moderate", label: "Moderate" },
   { key: "high", label: "High" },
-  { key: "vhigh", label: "Very high" },
+  { key: "moderate", label: "Moderate" },
+  { key: "low", label: "Low" },
+  { key: "none", label: "No exposure" },
 ] as const;
 
 /** Analysis window and comparison periods shown on the hero timeline. */
 export const analysisWindow = { start: 2013, end: 2025 };
 
+/**
+ * Comparison periods. `highIndex` = employment in high-exposure jobs,
+ * indexed to the 2013–2016 period (= 100).
+ */
 export const periods = [
-  { label: "Baseline", from: 2013, to: 2016, tone: "baseline" },
-  { label: "Baseline", from: 2016, to: 2019, tone: "baseline" },
-  { label: "Pre-ChatGPT · COVID era", from: 2019, to: 2022, tone: "pre" },
-  { label: "Post-ChatGPT", from: 2023, to: 2025, tone: "post" },
+  { label: "Baseline", from: 2013, to: 2016, tone: "baseline", highIndex: 100 },
+  { label: "Baseline", from: 2016, to: 2019, tone: "baseline", highIndex: 103.23 },
+  { label: "Pre-ChatGPT · COVID era", from: 2019, to: 2022, tone: "pre", highIndex: 101.94 },
+  { label: "Post-ChatGPT", from: 2022, to: 2025, tone: "post", highIndex: 96.23 },
 ] as const;
