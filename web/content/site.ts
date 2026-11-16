@@ -136,11 +136,11 @@ export const glossary = [
 ];
 
 export const members = [
-  { name: "Alec Ong Sze Hwee", email: "name@example.com" },
-  { name: "Felicia Paulus", email: "name@example.com" },
-  { name: "Felicia Tanujaya", email: "name@example.com" },
-  { name: "Mok Qing Ling", email: "name@example.com" },
-  { name: "Tan Zu Wei", email: "name@example.com" },
+  { name: "Ong Sze Hwee Alec", email: "alec.ong.2024@smu.edu.sg", handle: "Skacerine" },
+  { name: "Mok Qing Ling", email: "ql.mok.2024@smu.edu.sg", handle: "QLY2N" },
+  { name: "Tan Zu Wei", email: "zuwei.tan.2023@smu.edu.sg", handle: "zuinazoo" },
+  { name: "Felicia Tanujaya", email: "f.tanujaya.2023@smu.edu.sg", handle: "felifelicia" },
+  { name: "Felicia Paulus", email: "f.paulus.2023@smu.edu.sg", handle: "feliciapaulus" },
 ];
 
 /** AI-exposure levels, in the order and colours used in the Tableau workbook. */
