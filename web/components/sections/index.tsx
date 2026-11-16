@@ -224,7 +224,7 @@ export function Methodology() {
       <h3 className="mb-4 flex items-center gap-2 font-display text-lg font-semibold text-ink">
         <Database className="size-5 text-primary" aria-hidden /> Datasets
       </h3>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {datasets.map((d) => {
           const body = (
             <>

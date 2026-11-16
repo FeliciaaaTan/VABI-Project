@@ -124,13 +124,12 @@ export const takeaways = [
 export const datasets: { name: string; kind: string; grain: string; use: string; href?: string }[] = [
   { name: "Anthropic Economic Index", kind: "Static · 2026 snapshot", grain: "Occupations & their tasks", use: "How people use AI (Claude) across each occupation's tasks, and whether it automates or assists. Drives the exposure levels (High → No exposure) and the task charts.", href: "https://www.anthropic.com/economic-index" },
   { name: "BLS OEWS", kind: "Dynamic · annual", grain: "~830 occupations · May reference", use: "Employment and median wages, the occupation-level outcomes.", href: "https://www.bls.gov/oes/" },
-  { name: "Indeed Hiring Lab AI Tracker", kind: "Dynamic · monthly", grain: "U.S. national · CC BY 4.0", use: "Share of postings mentioning AI / GenAI, used as a national adoption signal.", href: "https://github.com/hiring-lab/ai-tracker" },
   { name: "CPS · Age (Current Population Survey)", kind: "Dynamic", grain: "Occupation × age group", use: "Employment by age group in exposed occupations, used for Q3.", href: "https://www.bls.gov/cps/" },
   { name: "BTOS (Business Trends and Outlook Survey)", kind: "Dynamic", grain: "U.S. businesses", use: "How businesses report using AI, used for Q4.", href: "https://www.census.gov/hfp/btos/" },
 ];
 
 export const pipeline = [
-  { step: "Collect", text: "Pull data from the BLS public API and download the static tables and the Hiring Lab CSV." },
+  { step: "Collect", text: "Pull data from the BLS and Census public sources and download the Anthropic Economic Index tables." },
   { step: "Clean", text: "Standardise codes and years and handle suppressed values (Python · pandas)." },
   { step: "Join", text: "Merge occupation-level data on 6-digit SOC codes." },
   { step: "Visualise", text: "Build interactive dashboards in Tableau, then publish to Tableau Public." },
@@ -139,7 +138,6 @@ export const pipeline = [
 export const limitations = [
   "These are descriptive trends. Differences between tiers are correlations, not proof that AI caused them.",
   "Some highly exposed occupations were already declining before ChatGPT (NY Fed), so a pre/post difference may continue an older trend.",
-  "The Indeed AI Tracker is national-only, so it cannot be split by industry or occupation.",
   "Age-group differences can reflect other forces too, such as fewer entry-level openings across the economy.",
   "AI exposure is a 2026 snapshot from Anthropic's Economic Index applied to all years, and it reflects how people use one AI assistant (Claude).",
   "Our data ends in 2025, but businesses' AI integration only accelerated sharply in 2024–2025. Effects on jobs and wages that take longer to appear won't show up yet.",
