@@ -67,7 +67,7 @@ export const vizzes: Viz[] = [
     interact: "Use the filters on the right to switch the wage basis, pick periods and exclude occupations. Hover any line or bar for details.",
     what: "How employment and wages across AI-exposure levels changed over each period, from pre-COVID to post-ChatGPT.",
     insight:
-      "At the overall level there is a visible change: after 2022, employment in highly exposed jobs declined significantly, while wages showed no significant change.",
+      "At the overall level there is a visible change: after 2022, employment in highly exposed jobs declined significantly, while wages showed no significant change. But the decline is dominated by one job family, Office & Admin Support. Once those jobs are excluded, the decline is no longer significant, so we can't say that employment in exposed jobs is falling sharply or that it is much affected by AI.",
     why: "It shows whether there is an overall impact of AI on employment and wages in highly exposed jobs.",
   },
   {
@@ -80,8 +80,8 @@ export const vizzes: Viz[] = [
     interact: "Compare job families across periods in the heatmap, then hover and select an occupation in the scatter plot to see its individual trend.",
     what: "The same trends broken down into job families and individual highly exposed occupations.",
     insight:
-      "The overall decline isn't what it seems. It is dominated by Office & Admin Support, and most of these declining trends had already started before COVID and ChatGPT. So we can't conclude that AI caused them. They seem more linked to the nature of the work, which is easy to automate.",
-    why: "It tests whether the overall decline is really an AI effect, or an older trend in a few occupations.",
+      "Looking at individual occupations confirms there is no significant break in trend after ChatGPT. Even in Office & Admin Support, the same decline was already under way before COVID and before ChatGPT. So we can't conclude that AI caused the decline. It seems more linked to the nature of the work, which is easy to automate.",
+    why: "It tests whether the overall decline is really an AI effect, or a continuation of trends that were already under way.",
   },
 
   // ── Q3 · Differences across age groups? ───────────────────────────────
