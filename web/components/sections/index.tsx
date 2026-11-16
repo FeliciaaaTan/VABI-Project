@@ -219,7 +219,7 @@ export function Methodology() {
       id="methodology"
       eyebrow="Methodology"
       title="Data, joins and limits"
-      lead="All datasets are free and publicly available. Occupations are joined on 6-digit SOC codes and industries on NAICS codes, producing one analysis-ready table."
+      lead="All datasets are free and publicly available. Occupation-level data is joined on 6-digit SOC codes, producing one analysis-ready table."
     >
       <h3 className="mb-4 flex items-center gap-2 font-display text-lg font-semibold text-ink">
         <Database className="size-5 text-primary" aria-hidden /> Datasets

@@ -48,7 +48,7 @@ export const questions = [
     num: 1,
     short: "Most Exposed Occupations",
     title: "Which occupations are most exposed to AI?",
-    lead: "Occupations ranked by the BLS's four AI-exposure tiers and their continuous AIOE score, sized by how many people work in them.",
+    lead: "Occupations grouped into High, Moderate, Low and No exposure using Anthropic's Economic Index, sized by how many people work in them, and the tasks within them that AI does or assists with.",
     blurb: "Start here: who is exposed",
   },
   {
@@ -122,8 +122,7 @@ export const takeaways = [
 ];
 
 export const datasets: { name: string; kind: string; grain: string; use: string; href?: string }[] = [
-  { name: "BLS AI Exposure Categories", kind: "Static", grain: "831 occupations · SOC 2018", use: "Four exposure tiers (Low → Very high) that drive the tier filter.", href: "https://www.bls.gov/emp/publications/ai-exposure-categories.htm" },
-  { name: "AI Occupational Exposure (AIOE / AIIE)", kind: "Static", grain: "SOC occupations · NAICS industries", use: "Continuous exposure scores to rank occupations within a tier and to score industries.", href: "https://doi.org/10.1002/smj.3286" },
+  { name: "Anthropic Economic Index", kind: "Static · 2026 snapshot", grain: "Occupations & their tasks", use: "How people use AI (Claude) across each occupation's tasks, and whether it automates or assists. Drives the exposure levels (High → No exposure) and the task charts.", href: "https://www.anthropic.com/economic-index" },
   { name: "BLS OEWS", kind: "Dynamic · annual", grain: "~830 occupations · May reference", use: "Employment and median wages, the occupation-level outcomes.", href: "https://www.bls.gov/oes/" },
   { name: "Indeed Hiring Lab AI Tracker", kind: "Dynamic · monthly", grain: "U.S. national · CC BY 4.0", use: "Share of postings mentioning AI / GenAI, used as a national adoption signal.", href: "https://github.com/hiring-lab/ai-tracker" },
   { name: "CPS · Age (Current Population Survey)", kind: "Dynamic", grain: "Occupation × age group", use: "Employment by age group in exposed occupations, used for Q3.", href: "https://www.bls.gov/cps/" },
@@ -133,7 +132,7 @@ export const datasets: { name: string; kind: string; grain: string; use: string;
 export const pipeline = [
   { step: "Collect", text: "Pull data from the BLS public API and download the static tables and the Hiring Lab CSV." },
   { step: "Clean", text: "Standardise codes and years and handle suppressed values (Python · pandas)." },
-  { step: "Join", text: "Merge occupations on 6-digit SOC codes and industries on NAICS codes." },
+  { step: "Join", text: "Merge occupation-level data on 6-digit SOC codes." },
   { step: "Visualise", text: "Build interactive dashboards in Tableau, then publish to Tableau Public." },
 ];
 
@@ -142,20 +141,18 @@ export const limitations = [
   "Some highly exposed occupations were already declining before ChatGPT (NY Fed), so a pre/post difference may continue an older trend.",
   "The Indeed AI Tracker is national-only, so it cannot be split by industry or occupation.",
   "Age-group differences can reflect other forces too, such as fewer entry-level openings across the economy.",
-  "Exposure tiers use the 2018 SOC structure. Occupations that were reclassified may not map cleanly.",
+  "AI exposure is a 2026 snapshot from Anthropic's Economic Index applied to all years, and it reflects how people use one AI assistant (Claude).",
   "Our data ends in 2025, but businesses' AI integration only accelerated sharply in 2024–2025. Effects on jobs and wages that take longer to appear won't show up yet.",
   "OEWS estimates pool three years of surveys, so we compare non-overlapping periods only. That leaves a single post-ChatGPT period (2022–2025) to compare against three earlier ones.",
 ];
 
 export const glossary = [
   { term: "SOC", def: "Standard Occupational Classification, the U.S. federal 6-digit occupation code used to join datasets." },
-  { term: "NAICS", def: "North American Industry Classification System, the codes used to join industry data." },
-  { term: "AIOE", def: "AI Occupational Exposure index (Felten, Raj & Seamans), which gives each occupation a continuous exposure score." },
-  { term: "AIIE", def: "AI Industry Exposure, the industry-level version of AIOE." },
+  { term: "Anthropic Economic Index", def: "Anthropic's measure of how people use Claude across the tasks in each occupation, including whether AI automates the task or assists a person." },
   { term: "OEWS", def: "Occupational Employment and Wage Statistics (BLS), annual employment and wages by occupation." },
   { term: "CPS", def: "Current Population Survey (BLS & Census), the monthly household survey behind U.S. employment by age." },
   { term: "BTOS", def: "Business Trends and Outlook Survey (Census Bureau), which asks businesses how they use AI." },
-  { term: "Exposure tier", def: "BLS's four-level classification (Low, Moderate, High, Very high), built from five external exposure measures." },
+  { term: "Exposure level", def: "Our four groups (High, Moderate, Low, No exposure), based on each occupation's AI usage in the Anthropic Economic Index." },
 ];
 
 export const members = [
