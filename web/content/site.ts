@@ -136,10 +136,7 @@ export const pipeline = [
 ];
 
 export const limitations = [
-  "These are descriptive trends. Differences between tiers are correlations, not proof that AI caused them.",
-  "Some highly exposed occupations were already declining before ChatGPT (NY Fed), so a pre/post difference may continue an older trend.",
   "Age-group differences can reflect other forces too, such as fewer entry-level openings across the economy.",
-  "AI exposure is a 2026 snapshot from Anthropic's Economic Index applied to all years, and it reflects how people use one AI assistant (Claude).",
   "Our data ends in 2025, but businesses' AI integration only accelerated sharply in 2024–2025. Effects on jobs and wages that take longer to appear won't show up yet.",
   "OEWS estimates pool three years of surveys, so we compare non-overlapping periods only. That leaves a single post-ChatGPT period (2022–2025) to compare against three earlier ones.",
 ];
