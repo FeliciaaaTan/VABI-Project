@@ -90,7 +90,7 @@ export const vizzes: Viz[] = [
     question: "q3",
     title: "Young vs older workers",
     kind: "dashboard",
-    src: "https://public.tableau.com/views/IS428-G1T3-Project/D5Age",
+    src: "https://public.tableau.com/views/IS428-G1T3-Project/D5DifferencesbyAgeGroup",
     interact: "Hover the lines and bars for exact values.",
     what: "Employment for young (20–24) and prime-age (35–54) workers by AI-exposure level, indexed to 2022 = 100 (CPS), plus each age group's change from 2022 to 2025, split by whether the job usually needs a degree.",
     insight:
@@ -104,9 +104,9 @@ export const vizzes: Viz[] = [
     question: "q4",
     title: "Inside the jobs where young workers fell behind",
     kind: "dashboard",
-    src: "https://public.tableau.com/views/IS428-G1T3-Project/D6Task",
-    interact: "Hover a job to compare young and older workers. Click the bars to see how much of each job's work AI automates vs augments.",
-    what: "Within each highly exposed occupation, the change in employment for ages 20–24 vs all other ages (2022 vs 2024–25 average), and, in the jobs where young workers fell furthest, how much of the work AI automates vs augments.",
+    src: "https://public.tableau.com/views/IS428-G1T3-Project/D6JobstoTasks",
+    interact: "Hover a job to compare young and older workers. Click a job's bar to see how much of its work AI automates vs augments, and its task-by-task breakdown.",
+    what: "Within each highly exposed occupation, the change in employment for ages 20–24 vs all other ages (2022 vs 2024–25 average), and, in the jobs where young workers fell furthest, how much of the work AI automates vs augments, broken down task by task.",
     insight:
       "In 16 of 28 highly exposed jobs, young workers fell behind older workers in the same job. In several of the jobs where they fell furthest, such as interviewers, data entry keyers and secretaries, AI mostly automates the work rather than augmenting it.",
     why: "It links the age gap to the work itself: where AI can do the tasks, entry-level roles may be the first to shrink.",
