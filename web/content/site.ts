@@ -37,7 +37,7 @@ export const nav: NavItem[] = [
 
 export const heroStats = [
   { value: "~3%", label: "of U.S. jobs are highly exposed to AI", note: "Anthropic Economic Index × OEWS 2025" },
-  { value: "−5.6%", label: "employment change in high-exposure jobs after ChatGPT (2022–25), after growing in earlier periods", note: "OEWS · employment index 2013–2016 = 100" },
+  { value: "−5.6%", label: "employment change in high-exposure jobs after ChatGPT (2022–25), driven mostly by customer service reps. Without them it's just −0.5%, so there's no clear overall decline", note: "OEWS · employment index 2013–2016 = 100" },
   { value: "−2.4%", label: "change in young workers' (20–24) employment in exposed jobs, 2022→2025, while other young workers grew 5.8%", note: "CPS · Age" },
 ];
 
