@@ -304,6 +304,7 @@ const initials = (name: string) =>
 
 export function Footer() {
   const links = [
+    // Opens in a new tab with the browser's PDF viewer (which has its own download button)
     { label: "Project report (PDF)", href: site.links.report, icon: FileText },
     { label: "GitHub", href: site.links.github, icon: Github },
     { label: "Tableau Public", href: site.links.tableauProfile, icon: ExternalLink },
@@ -326,7 +327,12 @@ export function Footer() {
             {links.map(({ label, href, icon: Icon }) => (
               <li key={label}>
                 {href ? (
-                  <a href={href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-ink hover:text-primary">
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 text-ink hover:text-primary"
+                  >
                     <Icon className="size-4" aria-hidden /> {label}
                   </a>
                 ) : (
